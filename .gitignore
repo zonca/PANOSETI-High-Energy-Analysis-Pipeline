@@ -5,3 +5,7 @@
 *.so
 *.pcm
 eventbuilding/pcapreader
+
+# CORSIKA source and compiled files
+install_corsika/corsika-77550/
+install_corsika/corsika*.tar.gz
