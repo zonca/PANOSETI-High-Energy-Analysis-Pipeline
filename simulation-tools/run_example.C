@@ -7,6 +7,11 @@
 #include "TROOT.h"
 #include "TString.h"
 #include "iostream"
+#include "string"
+
+// Forward declarations from panodisplay.C
+void readFile(std::string rootfile);
+void panodisplay(int eventNumber);
 
 void run_example(int eventNumber = 0, bool savePng = false, const char* outputPrefix = "example") {
     std::cout << "Reading example.root" << std::endl;
