@@ -9,15 +9,11 @@
 #include "iostream"
 #include "string"
 
-// Forward declarations from panodisplay.C
-void readFile(std::string rootfile);
-void panodisplay(int eventNumber);
+#include "panodisplay.C"
 
 void run_example(int eventNumber = 0, bool savePng = false, const char* outputPrefix = "example") {
     std::cout << "Reading example.root" << std::endl;
     std::cout << "Displaying event " << eventNumber << std::endl;
-    gROOT->LoadMacro("panodisplay.C");
-
     // Read the file and display event - check both possible locations
     const char* rootFile = "example.root";
     if (gSystem->AccessPathName(rootFile)) {
