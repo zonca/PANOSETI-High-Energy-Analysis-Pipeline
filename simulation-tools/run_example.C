@@ -26,6 +26,24 @@ void run_example(int eventNumber = 0, bool savePng = false, const char* outputPr
 
     readFile(rootFile);
 
+    int entries = t->Draw("eventNumber", "", "goff");
+    if (entries <= 0) {
+        std::cerr << "Error: no events found in ROOT file" << std::endl;
+        return;
+    }
+    if (eventNumber < 0) {
+        double minEvent = TMath::MinElement(entries, t->GetV1());
+        eventNumber = static_cast<int>(minEvent);
+        std::cout << "Using first available event " << eventNumber << std::endl;
+    } else {
+        int match = t->Draw("eventNumber", Form("eventNumber==%d", eventNumber), "goff");
+        if (match <= 0) {
+            double minEvent = TMath::MinElement(entries, t->GetV1());
+            eventNumber = static_cast<int>(minEvent);
+            std::cout << "Requested event not found; using " << eventNumber << std::endl;
+        }
+    }
+
     // Use batch mode when saving PNGs (no X11 required)
     gROOT->SetBatch(savePng ? kTRUE : kFALSE);
 
